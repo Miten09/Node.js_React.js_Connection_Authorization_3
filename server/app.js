@@ -20,6 +20,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
+  res.cookie("test", "thap");
   res.send("Hello World from contact page");
 });
 
