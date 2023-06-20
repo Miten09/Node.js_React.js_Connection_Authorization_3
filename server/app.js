@@ -11,10 +11,6 @@ app.use("/", require("./router/auth"));
 
 const PORT = process.env.PORT;
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World from home page");
-// });
-
 app.get("/about", (req, res) => {
   res.send("Hello World from about page");
 });
@@ -33,5 +29,5 @@ app.get("/signup", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("server is running at port 3000");
+  console.log(`Server is running at ${PORT}`);
 });

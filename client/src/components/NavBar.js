@@ -1,7 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
-import newLogo from "../images/tie.jpg";
 
 const NavBar = () => {
   return (
@@ -20,7 +19,11 @@ const NavBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse"
+          id="navbarSupportedContent"
+          style={{ marginRight: "30px" }}
+        >
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
               <NavLink className="nav-link" to="/">

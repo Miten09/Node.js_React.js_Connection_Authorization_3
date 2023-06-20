@@ -3,6 +3,10 @@ const router = express.Router();
 require("../db/conn");
 const User = require("../model/userSchema");
 const bcrypt = require("bcrypt");
+const authenticate = require("../middlewre/authenticate");
+const cookieParser = require("cookie-parser");
+
+router.use(cookieParser());
 
 router.get("/", (req, res) => {
   res.send("Hello World from home page router ");
@@ -46,7 +50,7 @@ router.post("/signin", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(422).json({
+      return res.status(400).json({
         error: "Please fill all the fields",
       });
     }
@@ -56,7 +60,7 @@ router.post("/signin", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
       if (!isMatch) {
-        return res.status(422).json({
+        return res.status(400).json({
           error: "Invalid credentials",
         });
       } else {
@@ -78,6 +82,12 @@ router.post("/signin", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+// About us page
+
+router.get("/about", authenticate, (req, res) => {
+  res.send(req.rootUser);
 });
 
 module.exports = router;
