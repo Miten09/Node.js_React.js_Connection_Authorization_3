@@ -8,21 +8,34 @@ import { Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { ErrorPage } from "./components/ErrorPage";
+import Logout from "./components/Logout";
+import { createContext } from "react";
+
+const UserContext = createContext();
 
 function App() {
-  return (
-    <>
-      <NavBar />
+  const Routing = () => {
+    return (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+    );
+  };
+  return (
+    <>
+      <UserContext.Provider>
+        <NavBar />
+        <Routing />
+      </UserContext.Provider>
     </>
   );
 }
 
 export default App;
+export { UserContext };

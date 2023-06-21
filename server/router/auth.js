@@ -90,4 +90,51 @@ router.get("/about", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
+//Get user data for contact us & Home page
+
+router.get("/getdata", authenticate, (req, res) => {
+  res.send(req.rootUser);
+});
+
+//Post messgage of contact page to database
+
+router.post("/contact", authenticate, async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+    if (!name || !email || !phone || !message) {
+      console.log("Plzz fill all the fields");
+      return res.status(401).json({
+        error: "plzz filled the contact form",
+      });
+    }
+    const userContact = await User.findOne({ _id: req.userID });
+    // console.log(userContact);
+    // console.log(req.userID);
+
+    if (userContact) {
+      const userMessage = await userContact.addMessage(
+        name,
+        email,
+        phone,
+        message
+      );
+      await userContact.save();
+      res.status(201).json({
+        message: "Message added successfully",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Logout page
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwtoken", { path: "/" });
+  res.status(201).json({
+    message: "user logged out",
+  });
+});
+
 module.exports = router;

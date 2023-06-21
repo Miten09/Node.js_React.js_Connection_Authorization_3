@@ -15,10 +15,10 @@ app.get("/about", (req, res) => {
   res.send("Hello World from about page");
 });
 
-app.get("/contact", (req, res) => {
-  res.cookie("test", "thap");
-  res.send("Hello World from contact page");
-});
+// app.get("/contact", (req, res) => {
+//   res.cookie("test", "thap");
+//   res.send("Hello World from contact page ");
+// });
 
 app.get("/signin", (req, res) => {
   res.send("Hello login world");

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   const callAboutPage = async () => {
     try {
@@ -15,7 +16,8 @@ const About = () => {
       });
       const data = await res.json();
       console.log(data);
-      if (!res.status === 200) {
+      setUserData(data);
+      if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
       }
@@ -24,9 +26,11 @@ const About = () => {
       navigate("/login");
     }
   };
+
   useEffect(() => {
     callAboutPage();
   }, []);
+
   return (
     <>
       <div>
@@ -72,31 +76,31 @@ const About = () => {
                       <label>USER ID</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>857475746580</p>
+                      <p>86956775747</p>
                     </div>
                     <div className="col-md-6">
                       <label>Name</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>Miten</p>
+                      <p>{userData.name}</p>
                     </div>
                     <div className="col-md-6">
                       <label>Email</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>miten@gmail.com</p>
+                      <p>{userData.email}</p>
                     </div>
                     <div className="col-md-6">
                       <label>Phone</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>99874132563</p>
+                      <p>{userData.phone}</p>
                     </div>
                     <div className="col-md-6">
                       <label>Profession</label>
                     </div>
                     <div className="col-md-6 ">
-                      <p>Web developer</p>
+                      <p>{userData.work}</p>
                     </div>
                   </div>
                 </div>

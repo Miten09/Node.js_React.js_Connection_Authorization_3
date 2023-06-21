@@ -19,7 +19,7 @@ const Login = () => {
       }),
     });
     const data = await res.json();
-    console.log(res);
+    console.log(data);
 
     if (res.status === 400 || !data) {
       window.alert("Invalid credentials");
